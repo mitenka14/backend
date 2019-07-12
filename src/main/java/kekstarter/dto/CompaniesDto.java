@@ -1,8 +1,6 @@
-package kekstarter.dto.companiesDto;
+package kekstarter.dto;
 
-import kekstarter.dto.Dto;
-
-public class CompaniesInfoDto implements Dto {
+public class CompaniesDto {
 
     private Long id;
     private String name;
