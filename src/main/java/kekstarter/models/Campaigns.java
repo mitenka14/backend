@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Companies {
+public class Campaigns {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,21 +18,12 @@ public class Companies {
     @Column(name = "text")
     private String text;
 
-    public Companies(@NotNull String name, @NotNull String text) {
+    public Campaigns(@NotNull String name, @NotNull String text) {
         this.name = name;
         this.text = text;
     }
 
-    public Companies() {
-    }
-
-    @Override
-    public String toString() {
-        return "News{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", text='" + text + '\'' +
-                '}';
+    public Campaigns() {
     }
 
     public Long getId() {

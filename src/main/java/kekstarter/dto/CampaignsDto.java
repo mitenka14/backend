@@ -1,6 +1,6 @@
 package kekstarter.dto;
 
-public class CompaniesDto {
+public class CampaignsDto {
 
     private Long id;
     private String name;
