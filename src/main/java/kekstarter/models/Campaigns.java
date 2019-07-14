@@ -2,6 +2,7 @@ package kekstarter.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Campaigns {
@@ -11,10 +12,12 @@ public class Campaigns {
     private Long id;
 
     @NotNull
+    @Size(min = 4)
     @Column(name = "name")
     private String name;
 
     @NotNull
+
     @Column(name = "text")
     private String text;
 
