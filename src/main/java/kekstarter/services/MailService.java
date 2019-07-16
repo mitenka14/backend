@@ -1,6 +1,8 @@
 package kekstarter.services;
 
 import kekstarter.models.Users;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -12,7 +14,7 @@ public class MailService {
 
     private final JavaMailSender mailSender;
 
-    MailService(JavaMailSender mailSender) {
+    public MailService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
 
@@ -23,12 +25,12 @@ public class MailService {
         return StringUtils.isEmpty(user.getEmail());
     }
 
-    public void send(String emailTo, String subject, String message) {
+    public void send(String emailTo, String code) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom(username);
         mailMessage.setTo(emailTo);
-        mailMessage.setSubject(subject);
-        mailMessage.setText(message);
+        mailMessage.setSubject("Activation code");
+        mailMessage.setText("Welcome to KEKstarter! Please, visit next link to finish registration: http://localhost:3000/auth/activation/"+code);
         mailSender.send(mailMessage);
     }
 }

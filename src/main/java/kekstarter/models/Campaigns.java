@@ -1,10 +1,16 @@
 package kekstarter.models;
 
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
+@Getter
+@Setter
+@RequiredArgsConstructor
+
 public class Campaigns {
 
     @Id
@@ -21,35 +27,5 @@ public class Campaigns {
     @Column(name = "text")
     private String text;
 
-    public Campaigns(@NotNull String name, @NotNull String text) {
-        this.name = name;
-        this.text = text;
-    }
 
-    public Campaigns() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
 }

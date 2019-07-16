@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class CampaignsController {
 
@@ -23,7 +22,7 @@ public class CampaignsController {
         return this.campaignsService.getCampaigns();
     }
 
-    @PostMapping("/addcompany")
+    @PostMapping("/addcampaign")
     public void addCampaigns(@RequestBody CampaignsDto campaignsDto) {
         this.campaignsService.addCampaigns(campaignsDto);
     }
