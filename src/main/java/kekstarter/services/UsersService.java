@@ -41,7 +41,6 @@ public class UsersService {
         Users user = usersRepo.findByActivationCode(code);
             user.setBlocked(false);
             user.setActivationCode(null);
-            user.setActive(true);
             usersRepo.save(user);
     }
 

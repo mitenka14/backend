@@ -23,8 +23,4 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowCredentials(false).maxAge(MAX_AGE);
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(12);
-    }
 }

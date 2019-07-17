@@ -44,9 +44,6 @@ public class Users {
     @Column(name = "activationCode")
     private String activationCode;
 
-    @Column(name ="active")
-    private Boolean active = Boolean.FALSE;
-
     @Column(name = "blocked")
     private Boolean blocked = Boolean.TRUE;
 
