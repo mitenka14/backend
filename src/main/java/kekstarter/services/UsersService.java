@@ -1,5 +1,6 @@
 package kekstarter.services;
 
+import kekstarter.mappers.usersMappers.UsersInfoMapper;
 import kekstarter.responseMessage.ResponseMessages;
 import kekstarter.dto.ResponseTextDto;
 import kekstarter.dto.UsersDto;
@@ -22,6 +23,7 @@ public class UsersService {
     private final UsersRepo usersRepo;
     private final UsersAddMapper usersAddMapper;
     private final PasswordEncoder passwordEncoder;
+    private final UsersInfoMapper usersInfoMapper;
 
 
 
@@ -42,6 +44,11 @@ public class UsersService {
             user.setBlocked(false);
             user.setActivationCode(null);
             usersRepo.save(user);
+    }
+
+    public UsersDto findUserByUsername(String username){
+        Users user = usersRepo.findByUsername(username);
+        return this.usersInfoMapper.makeDto(user);
     }
 
     private Boolean userExists(String username) {
