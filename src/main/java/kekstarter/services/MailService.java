@@ -1,8 +1,6 @@
 package kekstarter.services;
 
-import kekstarter.models.Users;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import kekstarter.models.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -21,7 +19,7 @@ public class MailService {
     @Value("${spring.mail.username}")
     private String username;
 
-    public Boolean isNull(Users user) {
+    public Boolean isNull(User user) {
         return StringUtils.isEmpty(user.getEmail());
     }
 

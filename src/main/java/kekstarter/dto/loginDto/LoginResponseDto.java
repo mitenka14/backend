@@ -1,7 +1,7 @@
 package kekstarter.dto.loginDto;
 
 import kekstarter.dto.ResponseTextDto;
-import kekstarter.models.Users;
+import kekstarter.models.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +15,7 @@ public class LoginResponseDto {
     private String userRole;
 
 
-    public LoginResponseDto(String token, ResponseTextDto responseTextDto, Users user) {
+    public LoginResponseDto(String token, ResponseTextDto responseTextDto, User user) {
         this.token = token;
         this.responseTextDto = responseTextDto;
         if (user != null) {

@@ -1,7 +1,9 @@
 package kekstarter.mappers.campaignsMappers;
 
 import kekstarter.dto.CampaignsDto;
-import kekstarter.models.Campaigns;
+import kekstarter.models.Campaign;
+import kekstarter.models.User;
+import kekstarter.repositories.UsersRepo;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -17,18 +19,20 @@ public class CampaignsInfoMapper {
     }
 
 
-    public CampaignsDto makeConversion(Campaigns campaigns) {
-        CampaignsDto companiesAddDto = new CampaignsDto();
-        companiesAddDto.setId(campaigns.getId());
-        companiesAddDto.setName(campaigns.getName());
-        companiesAddDto.setText(campaigns.getText());
-        return companiesAddDto;
+    public CampaignsDto makeConversion(Campaign campaign) {
+        CampaignsDto campaignsDto = new CampaignsDto();
+        campaignsDto.setId(campaign.getId());
+        campaignsDto.setId_user(campaign.getUser().getId());
+        campaignsDto.setUsername(campaign.getUser().getUsername());
+        campaignsDto.setName(campaign.getName());
+        campaignsDto.setText(campaign.getText());
+        return campaignsDto;
     }
 
-    public List<CampaignsDto> makeList(List<Campaigns> campaignsList) {
+    public List<CampaignsDto> makeList(List<Campaign> campaignsList) {
         List<CampaignsDto> companiesInfoDtoList = new ArrayList<>();
-        for (Campaigns campaigns : campaignsList) {
-            companiesInfoDtoList.add(makeConversion(campaigns));
+        for (Campaign campaign : campaignsList) {
+            companiesInfoDtoList.add(makeConversion(campaign));
         }
         return companiesInfoDtoList;
     }

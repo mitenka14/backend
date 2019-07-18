@@ -1,6 +1,6 @@
 package kekstarter.models;
 
-public enum UsersRole {
+public enum UserRole {
     ROLE_ADMIN,
     ROLE_USER
 }

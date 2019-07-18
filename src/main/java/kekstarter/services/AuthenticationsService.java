@@ -4,7 +4,7 @@ import kekstarter.dto.JsonException;
 import kekstarter.dto.ResponseTextDto;
 import kekstarter.dto.loginDto.LoginRequestDto;
 import kekstarter.dto.loginDto.LoginResponseDto;
-import kekstarter.models.Users;
+import kekstarter.models.User;
 import kekstarter.repositories.UsersRepo;
 import kekstarter.responseMessage.ResponseMessages;
 import kekstarter.security.models.JwtUserDetails;
@@ -38,7 +38,7 @@ public class AuthenticationsService {
             final Authentication authResult = this.authenticationManager.authenticate(authRequest);
             if (authResult.isAuthenticated()) {
                 JwtUserDetails userDetails = (JwtUserDetails) authResult.getPrincipal();
-                Users user = usersRepo.findById((long)userDetails.getId());
+                User user = usersRepo.findById((long)userDetails.getId());
                 String token = this.authenticationHelper.generateToken(userDetails.getId());
                 return new LoginResponseDto(token, new ResponseTextDto(ResponseMessages.SUCCESS), user);
             }

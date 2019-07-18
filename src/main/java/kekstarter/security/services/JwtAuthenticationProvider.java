@@ -1,7 +1,7 @@
 package kekstarter.security.services;
 
 
-import kekstarter.models.Users;
+import kekstarter.models.User;
 import kekstarter.repositories.UsersRepo;
 import kekstarter.security.exceptions.ExpiredTokenAuthenticationException;
 import kekstarter.security.exceptions.InvalidTokenAuthenticationException;
@@ -44,7 +44,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         }
 
         // Getting user from database
-        Users user = usersRepo.findById(userEntityId)
+        User user = usersRepo.findById(userEntityId)
                 .orElseThrow(() -> new InvalidTokenAuthenticationException("Token does not contain existed user id."));
 
         // Return authenticated Authentication

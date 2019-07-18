@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @Setter
 @RequiredArgsConstructor
 
-public class Campaigns {
+public class Campaign {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,9 +23,12 @@ public class Campaigns {
     private String name;
 
     @NotNull
-
     @Column(name = "text")
     private String text;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 
 
 }

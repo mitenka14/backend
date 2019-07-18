@@ -1,18 +1,26 @@
 package kekstarter.mappers.campaignsMappers;
 
 import kekstarter.dto.CampaignsDto;
-import kekstarter.models.Campaigns;
+import kekstarter.models.Campaign;
+import kekstarter.models.User;
+import kekstarter.repositories.UsersRepo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class CampaignsAddMapper {
 
-    public Campaigns makeModel(CampaignsDto campaignsDto) {
-        Campaigns campaigns = new Campaigns();
-        campaigns.setId(campaignsDto.getId());
-        campaigns.setName(campaignsDto.getName());
-        campaigns.setText(campaignsDto.getText());
-        return campaigns;
+    private final UsersRepo usersRepo;
+
+    public Campaign makeModel(CampaignsDto campaignsDto) {
+        Campaign campaign = new Campaign();
+        campaign.setId(campaignsDto.getId());
+        User user = this.usersRepo.findByUsername(campaignsDto.getUsername());
+        campaign.setUser(user);
+        campaign.setName(campaignsDto.getName());
+        campaign.setText(campaignsDto.getText());
+        return campaign;
     }
 
 }

@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,7 +39,7 @@ public class Users {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private UsersRole role = UsersRole.ROLE_USER;
+    private UserRole role = UserRole.ROLE_USER;
 
     @Column(name = "activationCode")
     private String activationCode;

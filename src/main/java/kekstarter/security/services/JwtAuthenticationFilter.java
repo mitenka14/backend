@@ -32,7 +32,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         try {
             // Getting JWT token from request
             String token = Optional.ofNullable(request.getHeader(AuthenticationHelper.AUTHENTICATION_HEADER))
-                    .map(header -> header.substring(7)).orElse(null);
+                    .orElse(null);
 
             if (Objects.isNull(token)) {
                 throw new BadCredentialsException("Token not found in request's header.");

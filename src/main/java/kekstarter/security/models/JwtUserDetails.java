@@ -1,6 +1,6 @@
 package kekstarter.security.models;
 
-import kekstarter.models.Users;
+import kekstarter.models.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,7 +18,7 @@ public class JwtUserDetails implements UserDetails {
     private String password;
     private Set<GrantedAuthority> authorities;
 
-    public JwtUserDetails(Users user) {
+    public JwtUserDetails(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
         this.password = user.getPassword();

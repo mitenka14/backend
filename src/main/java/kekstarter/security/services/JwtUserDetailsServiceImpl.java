@@ -1,6 +1,6 @@
 package kekstarter.security.services;
 
-import kekstarter.models.Users;
+import kekstarter.models.User;
 import kekstarter.repositories.UsersRepo;
 import kekstarter.dto.JsonException;
 import kekstarter.security.models.JwtUserDetails;
@@ -20,7 +20,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users byUsername = this.usersRepo.findByUsername(username);
+        User byUsername = this.usersRepo.findByUsername(username);
 
         return Optional.ofNullable(byUsername)
                 .map(JwtUserDetails::new)

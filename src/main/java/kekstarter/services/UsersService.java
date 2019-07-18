@@ -5,7 +5,7 @@ import kekstarter.responseMessage.ResponseMessages;
 import kekstarter.dto.ResponseTextDto;
 import kekstarter.dto.UsersDto;
 import kekstarter.mappers.usersMappers.UsersAddMapper;
-import kekstarter.models.Users;
+import kekstarter.models.User;
 import kekstarter.repositories.UsersRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,7 +28,7 @@ public class UsersService {
 
 
     public ResponseTextDto addUser(UsersDto usersDto){
-        Users user = usersAddMapper.makeModel(usersDto);
+        User user = usersAddMapper.makeModel(usersDto);
         if (usersRepo.existsByUsernameAndEmail(user.getUsername(), user.getEmail())) {
             return new ResponseTextDto(ResponseMessages.ALREADY_EXISTS);
         }
@@ -40,14 +40,14 @@ public class UsersService {
     }
 
     public void activateUser(String code) {
-        Users user = usersRepo.findByActivationCode(code);
+        User user = usersRepo.findByActivationCode(code);
             user.setBlocked(false);
             user.setActivationCode(null);
             usersRepo.save(user);
     }
 
     public UsersDto findUserByUsername(String username){
-        Users user = usersRepo.findByUsername(username);
+        User user = usersRepo.findByUsername(username);
         return this.usersInfoMapper.makeDto(user);
     }
 
@@ -55,7 +55,7 @@ public class UsersService {
         return usersRepo.findByUsername(username) != null;
     }
 
-    private void newActivationCode(Users user){
+    private void newActivationCode(User user){
         user.setActivationCode(UUID.randomUUID().toString());
     }
 

@@ -1,15 +1,14 @@
 package kekstarter.mappers.usersMappers;
 
 import kekstarter.dto.UsersDto;
-import kekstarter.models.Users;
-import org.apache.catalina.User;
+import kekstarter.models.User;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UsersAddMapper {
 
-    public Users makeModel(UsersDto usersDto) {
-        Users user = new Users();
+    public User makeModel(UsersDto usersDto) {
+        User user = new User();
         user.setFirstName(usersDto.getFirstName());
         user.setSecondName(usersDto.getSecondName());
         user.setUsername(usersDto.getUsername());

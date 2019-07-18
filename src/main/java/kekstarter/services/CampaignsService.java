@@ -3,10 +3,9 @@ package kekstarter.services;
 import kekstarter.dto.CampaignsDto;
 import kekstarter.mappers.campaignsMappers.CampaignsAddMapper;
 import kekstarter.mappers.campaignsMappers.CampaignsInfoMapper;
-import kekstarter.models.Campaigns;
+import kekstarter.models.Campaign;
 import kekstarter.repositories.CampaignsRepo;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class CampaignsService {
 
 
     public void addCampaigns(CampaignsDto campaignsDto) {
-        Campaigns company = campaignsAddMapper.makeModel(campaignsDto);
+        Campaign company = campaignsAddMapper.makeModel(campaignsDto);
         this.campaignsRepo.save(company);
     }
 
