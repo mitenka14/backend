@@ -39,6 +39,9 @@ public class AuthenticationsService {
             if (authResult.isAuthenticated()) {
                 JwtUserDetails userDetails = (JwtUserDetails) authResult.getPrincipal();
                 User user = usersRepo.findById((long)userDetails.getId());
+                if (user.getBlocked()==true){
+                    return new LoginResponseDto(null, new ResponseTextDto(ResponseMessages.USER_BLOCKED), user);
+                }
                 String token = this.authenticationHelper.generateToken(userDetails.getId());
                 return new LoginResponseDto(token, new ResponseTextDto(ResponseMessages.SUCCESS), user);
             }

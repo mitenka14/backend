@@ -46,14 +46,11 @@ public class UsersService {
             usersRepo.save(user);
     }
 
-    public UsersDto findUserByUsername(String username){
-        User user = usersRepo.findByUsername(username);
+    public UsersDto findUserById(long id){
+        User user = usersRepo.findById(id);
         return this.usersInfoMapper.makeDto(user);
     }
 
-    private Boolean userExists(String username) {
-        return usersRepo.findByUsername(username) != null;
-    }
 
     private void newActivationCode(User user){
         user.setActivationCode(UUID.randomUUID().toString());

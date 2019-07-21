@@ -16,8 +16,7 @@ public class CampaignsAddMapper {
     public Campaign makeModel(CampaignsDto campaignsDto) {
         Campaign campaign = new Campaign();
         campaign.setId(campaignsDto.getId());
-        User user = this.usersRepo.findByUsername(campaignsDto.getUsername());
-        campaign.setUser(user);
+        campaign.setUser(this.usersRepo.findById(campaignsDto.getId_user()));
         campaign.setName(campaignsDto.getName());
         campaign.setText(campaignsDto.getText());
         return campaign;

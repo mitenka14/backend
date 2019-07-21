@@ -5,11 +5,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CampaignsDto {
+public class CommentsDto {
 
     private long id;
-    private String name;
     private String text;
+    private long id_campaign;
     private long id_user;
     private String username;
 }

@@ -9,7 +9,7 @@ public class ResponseMessages {
 
     static public final String ERROR = "error";
     static public final String ALREADY_EXISTS = "111";
-    static public final String ERROR_USER_ALREADY_EXISTS = "dsfsdfsd";
+    static public final String USER_BLOCKED = "222";
     static public final String ERROR_ISNT_UNIQUE_EMAIL = "222";
     static public final String ERROR_USER_DELETED = "User is deleted";
     static public final String ERROR_USER_BLOCKED = "User is blocked";

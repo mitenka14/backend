@@ -2,8 +2,6 @@ package kekstarter.mappers.campaignsMappers;
 
 import kekstarter.dto.CampaignsDto;
 import kekstarter.models.Campaign;
-import kekstarter.models.User;
-import kekstarter.repositories.UsersRepo;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ public class CampaignsInfoMapper {
     }
 
 
-    public CampaignsDto makeConversion(Campaign campaign) {
+    public CampaignsDto makeDto(Campaign campaign) {
         CampaignsDto campaignsDto = new CampaignsDto();
         campaignsDto.setId(campaign.getId());
         campaignsDto.setId_user(campaign.getUser().getId());
@@ -30,10 +28,10 @@ public class CampaignsInfoMapper {
     }
 
     public List<CampaignsDto> makeList(List<Campaign> campaignsList) {
-        List<CampaignsDto> companiesInfoDtoList = new ArrayList<>();
+        List<CampaignsDto> campaignsDtoList = new ArrayList<>();
         for (Campaign campaign : campaignsList) {
-            companiesInfoDtoList.add(makeConversion(campaign));
+            campaignsDtoList.add(makeDto(campaign));
         }
-        return companiesInfoDtoList;
+        return campaignsDtoList;
     }
 }

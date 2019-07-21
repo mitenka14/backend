@@ -17,8 +17,8 @@ public class UsersController {
 
     private final UsersService usersService;
 
-    @GetMapping("/{username}")
-    public UsersDto findUserByUsername(@PathVariable String username){
-        return this.usersService.findUserByUsername(username);
+    @GetMapping("/{id}")
+    public UsersDto findUserByUsername(@PathVariable long id){
+        return this.usersService.findUserById(id);
     }
 }

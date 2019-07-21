@@ -45,6 +45,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
             return this.getAuthenticationManager().authenticate(authRequest);
         } catch (AuthenticationException exception) {
             // Go to 401 error page if exception thrown
+            response.addHeader("401","401");
             unsuccessfulAuthentication(request, response, exception);
         }
         return null;
