@@ -24,6 +24,7 @@ public class CampaignsInfoMapper {
         campaignsDto.setUsername(campaign.getUser().getUsername());
         campaignsDto.setName(campaign.getName());
         campaignsDto.setText(campaign.getText());
+        campaignsDto.setImageUrl(campaign.getImageUrl());
         return campaignsDto;
     }
 

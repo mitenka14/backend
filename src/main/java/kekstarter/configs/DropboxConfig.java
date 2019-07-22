@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class DropboxConfig {
-    @Value("")
+    @Value("${DROPBOX.TOKEN}")
     private String accessToken;
 
     @Bean

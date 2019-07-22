@@ -19,6 +19,7 @@ public class CampaignsAddMapper {
         campaign.setUser(this.usersRepo.findById(campaignsDto.getId_user()));
         campaign.setName(campaignsDto.getName());
         campaign.setText(campaignsDto.getText());
+        campaign.setImageUrl(campaignsDto.getImageUrl());
         return campaign;
     }
 

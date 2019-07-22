@@ -23,7 +23,7 @@ public class DropboxService {
         try (InputStream in = new FileInputStream(convert(image))) {
             String keyName = UUID.randomUUID().toString();
             this.client.files().uploadBuilder("/" + keyName).uploadAndFinish(in);
-            return keyName;
+            return getPublicUrl(keyName);
         } catch (IOException e) {
             throw new JsonException("Cannot upload image file");
         } catch (UploadErrorException e) {

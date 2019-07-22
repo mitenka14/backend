@@ -26,6 +26,9 @@ public class Campaign {
     @Column(name = "text")
     private String text;
 
+    @Column(name = "imageUrl")
+    private String imageUrl;
+
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
