@@ -3,20 +3,23 @@ package kekstarter.controllers;
 import kekstarter.dto.CampaignsDto;
 import kekstarter.dto.CommentsDto;
 import kekstarter.services.CampaignsService;
+import kekstarter.services.DropboxService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "campaigns",produces = MediaType.APPLICATION_JSON_VALUE)
+@RequiredArgsConstructor
 public class CampaignsController {
 
+    private final DropboxService dropboxService;
     private final CampaignsService campaignsService;
 
-    public CampaignsController(CampaignsService campaignsService) {
-        this.campaignsService = campaignsService;
-    }
+
 
     @GetMapping("/list")
     public List<CampaignsDto> getCampaigns() {
@@ -31,6 +34,11 @@ public class CampaignsController {
     @GetMapping("/campaign/{idCampaign}")
     public CampaignsDto getCampaignById(@PathVariable long idCampaign) {
         return this.campaignsService.getCampaignById(idCampaign);
+    }
+
+    @PostMapping("/new/addcampaign/addimage")
+    public String addImage(@RequestParam("file") MultipartFile image) {
+        return this.dropboxService.uploadImage(image);
     }
 
     @PostMapping("/campaign/{idCampaign}/comments/add")
