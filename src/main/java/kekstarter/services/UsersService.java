@@ -4,7 +4,7 @@ import kekstarter.mappers.usersMappers.UsersInfoMapper;
 import kekstarter.responseMessage.ResponseMessages;
 import kekstarter.dto.ResponseTextDto;
 import kekstarter.dto.UsersDto;
-import kekstarter.mappers.usersMappers.UsersAddMapper;
+import kekstarter.mappers.usersMappers.UsersEditMapper;
 import kekstarter.models.User;
 import kekstarter.repositories.UsersRepo;
 import lombok.RequiredArgsConstructor;
@@ -21,14 +21,14 @@ public class UsersService {
 
     private final MailService mailService;
     private final UsersRepo usersRepo;
-    private final UsersAddMapper usersAddMapper;
+    private final UsersEditMapper usersEditMapper;
     private final PasswordEncoder passwordEncoder;
     private final UsersInfoMapper usersInfoMapper;
 
 
 
     public ResponseTextDto addUser(UsersDto usersDto){
-        User user = usersAddMapper.makeModel(usersDto);
+        User user = usersEditMapper.makeModel(usersDto);
         if (usersRepo.existsByUsernameAndEmail(user.getUsername(), user.getEmail())) {
             return new ResponseTextDto(ResponseMessages.ALREADY_EXISTS);
         }

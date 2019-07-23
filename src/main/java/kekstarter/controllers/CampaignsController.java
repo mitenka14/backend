@@ -2,6 +2,7 @@ package kekstarter.controllers;
 
 import kekstarter.dto.CampaignsDto;
 import kekstarter.dto.CommentsDto;
+import kekstarter.security.services.AuthenticationHelper;
 import kekstarter.services.CampaignsService;
 import kekstarter.services.DropboxService;
 import lombok.RequiredArgsConstructor;
@@ -18,25 +19,38 @@ public class CampaignsController {
 
     private final DropboxService dropboxService;
     private final CampaignsService campaignsService;
+    private final AuthenticationHelper authenticationHelper;
 
 
-
-    @GetMapping("/list")
+    @GetMapping("list")
     public List<CampaignsDto> getCampaigns() {
         return this.campaignsService.getCampaigns();
     }
 
-    @PostMapping("/new/addcampaign")
+    @GetMapping("userlist/{idUser}")
+    public List<CampaignsDto> getCampaignsByUserId(@PathVariable long idUser){
+        return this.campaignsService.getCampaignsByUserId(idUser);
+    }
+
+    @PostMapping("new/addcampaign")
     public void addCampaigns(@RequestBody CampaignsDto campaignsDto) {
         this.campaignsService.addCampaigns(campaignsDto);
     }
 
-    @GetMapping("/campaign/{idCampaign}")
-    public CampaignsDto getCampaignById(@PathVariable long idCampaign) {
+    @GetMapping("campaign/{idCampaign}")
+    public CampaignsDto getCampaignById(final @PathVariable long idCampaign) {
         return this.campaignsService.getCampaignById(idCampaign);
     }
 
-    @PostMapping("/new/addcampaign/addimage")
+//    @GetMapping("campaign/{idCampaign}/delete")
+//    public long id(){
+//        return principal.getName();
+//    }
+//    public void deleteCampaign(long idCampaign) {
+//        this.campaignsService.deleteCampaign(idCampaign);
+//    }
+
+    @PostMapping("/add/addimage")
     public String addImage(@RequestParam("file") MultipartFile image) {
         return this.dropboxService.uploadImage(image);
     }

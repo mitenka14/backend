@@ -7,14 +7,10 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @Component
 public class CampaignsInfoMapper {
-
-    private final CampaignsAddMapper campaignsAddMapper;
-
-    public CampaignsInfoMapper(CampaignsAddMapper campaignsAddMapper) {
-        this.campaignsAddMapper = campaignsAddMapper;
-    }
 
 
     public CampaignsDto makeDto(Campaign campaign) {
@@ -28,11 +24,9 @@ public class CampaignsInfoMapper {
         return campaignsDto;
     }
 
-    public List<CampaignsDto> makeList(List<Campaign> campaignsList) {
-        List<CampaignsDto> campaignsDtoList = new ArrayList<>();
-        for (Campaign campaign : campaignsList) {
-            campaignsDtoList.add(makeDto(campaign));
-        }
-        return campaignsDtoList;
+    public List<CampaignsDto> makeList(final List<Campaign> campaignsList) {
+        return campaignsList.stream()
+                .map(this::makeDto)
+                .collect(toList());
     }
 }

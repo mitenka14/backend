@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class CampaignsAddMapper {
+public class CampaignsEditMapper {
 
     private final UsersRepo usersRepo;
 

@@ -5,7 +5,7 @@ import kekstarter.models.User;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UsersAddMapper {
+public class UsersEditMapper {
 
     public User makeModel(UsersDto usersDto) {
         User user = new User();

@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "auth", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class AuthController {
 
@@ -19,17 +19,17 @@ public class AuthController {
     private final AuthenticationsService authenticationsService;
 
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public LoginResponseDto login(@RequestBody final LoginRequestDto loginRequestDto){
         return authenticationsService.login(loginRequestDto);
     }
 
-    @PostMapping("/registration")
+    @PostMapping("registration")
     public ResponseTextDto addUser (@RequestBody UsersDto usersDto) {
         return usersService.addUser(usersDto);
     }
 
-    @GetMapping("/activation/{code}")
+    @GetMapping("activation/{code}")
     public void activation(@PathVariable String code) {
         usersService.activateUser(code);
     }

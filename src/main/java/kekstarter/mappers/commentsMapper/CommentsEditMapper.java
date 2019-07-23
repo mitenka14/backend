@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class CommentsAddMapper {
+public class CommentsEditMapper {
 
     private final UsersRepo usersRepo;
     private final CampaignsRepo campaignsRepo;

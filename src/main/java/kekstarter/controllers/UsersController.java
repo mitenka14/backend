@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "users", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UsersController {
 
     private final UsersService usersService;
 
-    @GetMapping("/{id}")
-    public UsersDto findUserByUsername(@PathVariable long id){
-        return this.usersService.findUserById(id);
+    @GetMapping("{id}")
+    public UsersDto findUserByUsername(final @PathVariable long id){
+        return usersService.findUserById(id);
     }
 }

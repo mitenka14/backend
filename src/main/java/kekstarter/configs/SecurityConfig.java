@@ -65,6 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers(HttpMethod.POST, allowedUrls)
                 .antMatchers(HttpMethod.GET, allowedUrls)
+                .antMatchers(HttpMethod.DELETE, allowedUrls)
                 .antMatchers(HttpMethod.OPTIONS, "/**");
     }
 
