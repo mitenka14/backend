@@ -1,14 +1,11 @@
 package kekstarter.controllers;
 
+import kekstarter.dto.ResponseTextDto;
 import kekstarter.dto.UsersDto;
-import kekstarter.mappers.usersMappers.UsersInfoMapper;
 import kekstarter.services.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,8 +14,18 @@ public class UsersController {
 
     private final UsersService usersService;
 
+    @PostMapping("registration")
+    public ResponseTextDto addUser (@RequestBody UsersDto usersDto) {
+        return usersService.addUser(usersDto);
+    }
+
+    @GetMapping("activation/{code}")
+    public void activation(@PathVariable String code) {
+        usersService.activateUser(code);
+    }
+
     @GetMapping("{id}")
     public UsersDto findUserByUsername(final @PathVariable long id){
-        return usersService.findUserById(id);
+        return usersService.getUserById(id);
     }
 }

@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class DropboxService {
+public class ImageService {
 
     private final DbxClientV2 client;
 

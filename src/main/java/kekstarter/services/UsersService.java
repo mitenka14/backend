@@ -24,6 +24,7 @@ public class UsersService {
     private final UsersEditMapper usersEditMapper;
     private final PasswordEncoder passwordEncoder;
     private final UsersInfoMapper usersInfoMapper;
+    private final AuthenticationsService authenticationsService;
 
 
 
@@ -46,9 +47,16 @@ public class UsersService {
             usersRepo.save(user);
     }
 
-    public UsersDto findUserById(long id){
-        User user = usersRepo.findById(id);
-        return this.usersInfoMapper.makeDto(user);
+    public UsersDto getUserById(long id){
+        return usersInfoMapper.makeDto(findUserById(id));
+    }
+
+    public User findUserById(long id){
+        return usersRepo.findById(id);
+    }
+
+    public User getUserFromToken(){
+        return usersRepo.findByUsername(authenticationsService.getName());
     }
 
 

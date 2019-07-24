@@ -11,12 +11,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CampaignsEditMapper {
 
-    private final UsersRepo usersRepo;
-
-    public Campaign makeModel(CampaignsDto campaignsDto) {
+    public Campaign makeModel(CampaignsDto campaignsDto, User user) {
         Campaign campaign = new Campaign();
         campaign.setId(campaignsDto.getId());
-        campaign.setUser(this.usersRepo.findById(campaignsDto.getId_user()));
+        campaign.setUser(user);
         campaign.setName(campaignsDto.getName());
         campaign.setText(campaignsDto.getText());
         campaign.setImageUrl(campaignsDto.getImageUrl());

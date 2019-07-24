@@ -14,14 +14,11 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CommentsEditMapper {
 
-    private final UsersRepo usersRepo;
-    private final CampaignsRepo campaignsRepo;
-
-    public Comment makeModel(CommentsDto commentsDto, long idCampaign) {
+    public Comment makeModel(CommentsDto commentsDto, Campaign campaign, User user) {
         Comment comment = new Comment();
         comment.setId(commentsDto.getId());
-        comment.setUser(this.usersRepo.findById(commentsDto.getId_user()));
-        comment.setCampaign(this.campaignsRepo.findById(idCampaign));
+        comment.setUser(user);
+        comment.setCampaign(campaign);
         comment.setText(commentsDto.getText());
         return comment;
 
