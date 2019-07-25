@@ -6,6 +6,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Component
 public class CommentsInfoMapper {
@@ -20,11 +23,7 @@ public class CommentsInfoMapper {
         return commentsDto;
     }
 
-    public List<CommentsDto> makeList(List<Comment> commentList){
-        List<CommentsDto> commentsDtoList = new ArrayList<>();
-        for (Comment comment : commentList){
-            commentsDtoList.add(makeDto(comment));
-        }
-        return commentsDtoList;
+    public List<CommentsDto> makeList(List<Comment> commentsList){
+        return commentsList.stream().map(this::makeDto).collect(toList());
     }
 }
