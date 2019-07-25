@@ -1,10 +1,12 @@
 package kekstarter.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -49,5 +51,9 @@ public class User {
 
     @Column(name = "blocked")
     private Boolean blocked = Boolean.TRUE;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonBackReference(value = "user-campaigns")
+    private Set<Campaign> campaigns;
 
 }

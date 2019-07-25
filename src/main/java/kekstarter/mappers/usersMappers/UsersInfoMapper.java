@@ -4,6 +4,9 @@ import kekstarter.dto.UsersDto;
 import kekstarter.models.User;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class UsersInfoMapper {
 
@@ -13,6 +16,11 @@ public class UsersInfoMapper {
         usersDto.setUsername(user.getUsername());
         usersDto.setFirstName(user.getFirstName());
         usersDto.setSecondName(user.getSecondName());
+        usersDto.setRole(user.getRole().name());
         return usersDto;
+    }
+
+    public List<UsersDto> makeList(List<User> userList) {
+        return userList.stream().map(this::makeDto).collect(Collectors.toList());
     }
 }

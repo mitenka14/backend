@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
-
 @Component
 public class CommentsInfoMapper {
 
@@ -24,6 +22,6 @@ public class CommentsInfoMapper {
     }
 
     public List<CommentsDto> makeList(List<Comment> commentsList){
-        return commentsList.stream().map(this::makeDto).collect(toList());
+        return commentsList.stream().map(this::makeDto).collect(Collectors.toList());
     }
 }

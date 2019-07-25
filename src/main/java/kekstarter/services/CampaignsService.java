@@ -4,6 +4,8 @@ import kekstarter.dto.CampaignsDto;
 import kekstarter.mappers.campaignsMappers.CampaignsEditMapper;
 import kekstarter.mappers.campaignsMappers.CampaignsInfoMapper;
 import kekstarter.models.Campaign;
+import kekstarter.models.User;
+import kekstarter.models.UserRole;
 import kekstarter.repositories.CampaignsRepo;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +41,8 @@ public class CampaignsService {
 
     public void deleteCampaign(long idCampaign){
         Campaign campaign = campaignsRepo.findById(idCampaign);
-        if(campaign.getUser() == usersService.getUserFromToken()){
+        User user = usersService.getUserFromToken();
+        if(campaign.getUser() == user || user.getRole()== UserRole.ROLE_ADMIN){
             campaignsRepo.delete(campaign);
         }
     }

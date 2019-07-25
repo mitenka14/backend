@@ -1,6 +1,7 @@
 package kekstarter.services;
 
 import kekstarter.mappers.usersMappers.UsersInfoMapper;
+import kekstarter.models.UserRole;
 import kekstarter.responseMessage.ResponseMessages;
 import kekstarter.dto.ResponseTextDto;
 import kekstarter.dto.UsersDto;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -57,6 +59,35 @@ public class UsersService {
 
     public User getUserFromToken(){
         return usersRepo.findByUsername(authenticationsService.getName());
+    }
+
+    public void deleteUserById(long id) {
+        User user = usersRepo.findById(id);
+        if(user.getRole() == UserRole.ROLE_USER) {
+            usersRepo.deleteById(id);
+        }
+    }
+
+    public List<UsersDto> getUsers(){
+        return usersInfoMapper.makeList(usersRepo.findAll());
+    }
+
+    public ResponseTextDto editUser(UsersDto usersDto, long id) {
+        User editor = usersRepo.findByUsername(authenticationsService.getName());
+        if (editor.getRole() != UserRole.ROLE_ADMIN || editor.getId() != id){
+            return new ResponseTextDto(ResponseMessages.DONT_HAVE_PERMISSION);
+        }
+//        if (usersRepo.existsByUsernameAndEmail(usersDto.getUsername(), usersDto.getEmail())) {
+//            return new ResponseTextDto(ResponseMessages.ALREADY_EXISTS);
+//        }
+        usersDto.setPassword(passwordEncoder.encode(usersDto.getPassword()));
+        User user = usersRepo.findById(id);
+        if (user.getPassword() != usersDto.getPassword()) {
+            return new ResponseTextDto(ResponseMessages.PASSWORDS_DONT_MATCH);
+        }
+        user = usersEditMapper.editUser(usersDto, user);
+        usersRepo.save(user);
+        return new ResponseTextDto(ResponseMessages.SUCCESS);
     }
 
 

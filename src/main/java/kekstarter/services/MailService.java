@@ -23,7 +23,7 @@ public class MailService {
         mailMessage.setFrom(username);
         mailMessage.setTo(emailTo);
         mailMessage.setSubject("Activation code");
-        mailMessage.setText("Welcome to KEKstarter! Please, visit next link to finish registration: http://localhost:3000/auth/activation/"+code);
+        mailMessage.setText("Welcome to KEKstarter! Please, visit next link to finish registration: http://localhost:3000/users/activation/"+code);
         mailSender.send(mailMessage);
     }
 }

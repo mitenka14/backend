@@ -10,8 +10,8 @@ public class ResponseMessages {
     static public final String ERROR = "error";
     static public final String ALREADY_EXISTS = "111";
     static public final String USER_BLOCKED = "222";
-    static public final String ERROR_ISNT_UNIQUE_EMAIL = "222";
-    static public final String ERROR_USER_DELETED = "User is deleted";
+    static public final String DONT_HAVE_PERMISSION = "333";
+    static public final String PASSWORDS_DONT_MATCH = "444";
     static public final String ERROR_USER_BLOCKED = "User is blocked";
     static public final String ERROR_USER_ISNT_ACTIVE = "User is not active";
     static public final String ERROR_INVALID_PARAMETRS = "Invalid username or password";

@@ -6,8 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
+import java.util.stream.Collectors;
 
 @Component
 public class CampaignsInfoMapper {
@@ -25,8 +24,6 @@ public class CampaignsInfoMapper {
     }
 
     public List<CampaignsDto> makeList(final List<Campaign> campaignsList) {
-        return campaignsList.stream()
-                .map(this::makeDto)
-                .collect(toList());
+        return campaignsList.stream().map(this::makeDto).collect(Collectors.toList());
     }
 }
