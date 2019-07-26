@@ -13,8 +13,8 @@ public class UsersDto {
     private String email;
     private String username;
     private String password;
+    private String newPassword;
     private String role;
-    private String imageUrl;
 
 
 

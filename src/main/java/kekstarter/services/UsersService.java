@@ -74,20 +74,32 @@ public class UsersService {
 
     public ResponseTextDto editUser(UsersDto usersDto, long id) {
         User editor = usersRepo.findByUsername(authenticationsService.getName());
-        if (editor.getRole() != UserRole.ROLE_ADMIN || editor.getId() != id){
+        if (editor.getRole() != UserRole.ROLE_ADMIN && editor.getId() != id){
             return new ResponseTextDto(ResponseMessages.DONT_HAVE_PERMISSION);
         }
-//        if (usersRepo.existsByUsernameAndEmail(usersDto.getUsername(), usersDto.getEmail())) {
-//            return new ResponseTextDto(ResponseMessages.ALREADY_EXISTS);
-//        }
-        usersDto.setPassword(passwordEncoder.encode(usersDto.getPassword()));
         User user = usersRepo.findById(id);
-        if (user.getPassword() != usersDto.getPassword()) {
-            return new ResponseTextDto(ResponseMessages.PASSWORDS_DONT_MATCH);
+        if (!passwordEncoder.matches(usersDto.getPassword(), user.getPassword())) {
+            return new ResponseTextDto(ResponseMessages.INVALID_PASSWORD);
+        }
+        if(!user.getUsername().equals(usersDto.getUsername()) && usersRepo.existsByUsername(usersDto.getUsername())){
+            return new ResponseTextDto(ResponseMessages.ALREADY_EXISTS);
+        }
+        if(!user.getEmail().equals(usersDto.getEmail()) && usersRepo.existsByEmail(usersDto.getEmail())){
+            return new ResponseTextDto(ResponseMessages.ALREADY_EXISTS);
+        }
+        if (usersDto.getNewPassword()!= null){
+            usersDto.setPassword(usersDto.getNewPassword());
         }
         user = usersEditMapper.editUser(usersDto, user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersRepo.save(user);
         return new ResponseTextDto(ResponseMessages.SUCCESS);
+    }
+
+    public void makeAdmin(long id) {
+        User user = usersRepo.findById(id);
+        user.setRole(UserRole.ROLE_ADMIN);
+        usersRepo.save(user);
     }
 
 

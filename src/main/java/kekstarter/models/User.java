@@ -43,9 +43,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role = UserRole.ROLE_USER;
 
-    @Column(name = "imageUrl")
-    private String imageUrl;
-
     @Column(name = "activationCode")
     private String activationCode;
 

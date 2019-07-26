@@ -16,6 +16,7 @@ public class UsersInfoMapper {
         usersDto.setUsername(user.getUsername());
         usersDto.setFirstName(user.getFirstName());
         usersDto.setSecondName(user.getSecondName());
+        usersDto.setEmail(user.getEmail());
         usersDto.setRole(user.getRole().name());
         return usersDto;
     }

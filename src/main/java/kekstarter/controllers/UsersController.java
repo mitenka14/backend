@@ -44,6 +44,12 @@ public class UsersController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("{id}/makeadmin")
+    public void makeAdmin(final @PathVariable long id) {
+        usersService.makeAdmin(id);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/admin/userlist")
     public List<UsersDto> getUsers() {
         return usersService.getUsers();
