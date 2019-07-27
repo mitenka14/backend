@@ -8,13 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class CampaignsEditMapper {
 
-    public Campaign makeModel(CampaignsDto campaignsDto, User user) {
-        Campaign campaign = new Campaign();
+    public Campaign makeModel(CampaignsDto campaignsDto, Campaign campaign) {
         campaign.setId(campaignsDto.getId());
-        campaign.setUser(user);
         campaign.setName(campaignsDto.getName());
         campaign.setText(campaignsDto.getText());
         campaign.setImageUrl(campaignsDto.getImageUrl());

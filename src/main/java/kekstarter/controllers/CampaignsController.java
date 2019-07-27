@@ -36,6 +36,11 @@ public class CampaignsController {
         return campaignsService.getCampaignById(idCampaign);
     }
 
+    @PostMapping("campaign/{idCampaign}")
+    public void editCampaign(@RequestBody CampaignsDto campaignsDto){
+        campaignsService.editCampaign(campaignsDto);
+    }
+
     @DeleteMapping("campaign/{idCampaign}")
     public void deleteCampaign(final @PathVariable long idCampaign) {
         campaignsService.deleteCampaign(idCampaign);

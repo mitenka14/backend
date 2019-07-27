@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UsersEditMapper {
 
-    public User makeModel(UsersDto usersDto) {
-        User user = new User();
+    public User makeModel(UsersDto usersDto, User user) {
         user.setFirstName(usersDto.getFirstName());
         user.setSecondName(usersDto.getSecondName());
         user.setUsername(usersDto.getUsername());
@@ -16,14 +15,4 @@ public class UsersEditMapper {
         user.setEmail(usersDto.getEmail());
         return user;
     }
-
-    public User editUser(UsersDto usersDto, User user) {
-        user.setFirstName(usersDto.getFirstName());
-        user.setSecondName(usersDto.getSecondName());
-        user.setUsername(usersDto.getUsername());
-        user.setPassword(usersDto.getPassword());
-        user.setEmail(usersDto.getEmail());
-        return user;
-    }
-
 }

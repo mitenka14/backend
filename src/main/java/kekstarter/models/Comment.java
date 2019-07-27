@@ -1,16 +1,19 @@
 package kekstarter.models;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
 @RequiredArgsConstructor
+@EqualsAndHashCode
 public class Comment {
 
     @Id
@@ -28,4 +31,6 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "id_campaign")
     private Campaign campaign;
+
+
 }

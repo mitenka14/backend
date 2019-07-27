@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class CommentsEditMapper {
 
     public Comment makeModel(CommentsDto commentsDto, Campaign campaign, User user) {
