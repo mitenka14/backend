@@ -12,7 +12,7 @@ public class ResponseMessages {
     static public final String USER_BLOCKED = "222";
     static public final String DONT_HAVE_PERMISSION = "333";
     static public final String INVALID_PASSWORD = "444";
-    static public final String ERROR_USER_BLOCKED = "User is blocked";
+    static public final String CANT_BE_EDITED = "555";
     static public final String ERROR_USER_ISNT_ACTIVE = "User is not active";
     static public final String ERROR_INVALID_PARAMETRS = "Invalid username or password";
 

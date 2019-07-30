@@ -1,12 +1,15 @@
 package kekstarter.controllers;
 
 import kekstarter.dto.CampaignsDto;
+import kekstarter.models.Campaign;
+import kekstarter.models.Tag;
 import kekstarter.services.CampaignsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "campaigns",produces = MediaType.APPLICATION_JSON_VALUE)
@@ -18,7 +21,7 @@ public class CampaignsController {
 
     @GetMapping("list")
     public List<CampaignsDto> getCampaigns() {
-        return this.campaignsService.getCampaigns();
+        return campaignsService.getCampaigns();
     }
 
     @GetMapping("userlist/{idUser}")
@@ -27,8 +30,8 @@ public class CampaignsController {
     }
 
     @PostMapping("add")
-    public void addCampaigns(@RequestBody CampaignsDto campaignsDto) {
-        campaignsService.addCampaigns(campaignsDto);
+    public Set<Tag> addCampaigns(@RequestBody CampaignsDto campaignsDto) {
+        return campaignsService.addCampaigns(campaignsDto);
     }
 
     @GetMapping("campaign/{idCampaign}")

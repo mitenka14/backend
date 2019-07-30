@@ -15,6 +15,7 @@ public class UsersDto {
     private String password;
     private String newPassword;
     private String role;
+    private boolean blocked;
 
 
 

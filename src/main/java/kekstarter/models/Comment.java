@@ -13,7 +13,6 @@ import java.util.Objects;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@EqualsAndHashCode
 public class Comment {
 
     @Id
@@ -32,5 +31,17 @@ public class Comment {
     @JoinColumn(name = "id_campaign")
     private Campaign campaign;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Comment comment = (Comment) o;
+        return Objects.equals(id, comment.id) &&
+                Objects.equals(text, comment.text);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, text);
+    }
 }

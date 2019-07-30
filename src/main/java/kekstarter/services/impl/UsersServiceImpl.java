@@ -1,16 +1,17 @@
 package kekstarter.services.impl;
 
+import kekstarter.dto.CampaignsDto;
 import kekstarter.mappers.usersMappers.UsersInfoMapper;
+import kekstarter.models.Campaign;
 import kekstarter.models.UserRole;
+import kekstarter.repositories.CampaignsRepo;
 import kekstarter.responseMessage.ResponseMessages;
 import kekstarter.dto.ResponseTextDto;
 import kekstarter.dto.UsersDto;
 import kekstarter.mappers.usersMappers.UsersEditMapper;
 import kekstarter.models.User;
 import kekstarter.repositories.UsersRepo;
-import kekstarter.services.AuthenticationsService;
-import kekstarter.services.MailService;
-import kekstarter.services.UsersService;
+import kekstarter.services.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,8 @@ public class UsersServiceImpl implements UsersService {
     private final PasswordEncoder passwordEncoder;
     private final UsersInfoMapper usersInfoMapper;
     private final AuthenticationsService authenticationsService;
+    private final TagsService tagsService;
+    private final CampaignsRepo campaignsRepo;
 
 
 
@@ -40,7 +43,7 @@ public class UsersServiceImpl implements UsersService {
         if (usersRepo.existsByUsernameAndEmail(user.getUsername(), user.getEmail())) {
             return new ResponseTextDto(ResponseMessages.ALREADY_EXISTS);
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(usersDto.getPassword()));
         newActivationCode(user);
         usersRepo.save(user);
         mailService.send(user.getEmail(),  user.getActivationCode());
@@ -74,7 +77,11 @@ public class UsersServiceImpl implements UsersService {
     public void deleteUserById(long id) {
         User user = usersRepo.findById(id);
         if(user.getRole() == UserRole.ROLE_USER) {
-            usersRepo.deleteById(id);
+            List<Campaign> campaigns = campaignsRepo.findAllByUser(user);
+            for(Campaign campaign : campaigns){
+                tagsService.deleteTags(campaign);
+            }
+            usersRepo.delete(user);
         }
     }
 
@@ -90,7 +97,10 @@ public class UsersServiceImpl implements UsersService {
             return new ResponseTextDto(ResponseMessages.DONT_HAVE_PERMISSION);
         }
         User user = usersRepo.findById(id);
-        if (!passwordEncoder.matches(usersDto.getPassword(), user.getPassword())) {
+        if (user.getRole() == UserRole.ROLE_ADMIN){
+            return new ResponseTextDto(ResponseMessages.CANT_BE_EDITED);
+        }
+        if (editor.getRole() != UserRole.ROLE_ADMIN && !passwordEncoder.matches(usersDto.getPassword(), user.getPassword())) {
             return new ResponseTextDto(ResponseMessages.INVALID_PASSWORD);
         }
         if(!user.getUsername().equals(usersDto.getUsername()) && usersRepo.existsByUsername(usersDto.getUsername())){
@@ -100,10 +110,9 @@ public class UsersServiceImpl implements UsersService {
             return new ResponseTextDto(ResponseMessages.ALREADY_EXISTS);
         }
         if (usersDto.getNewPassword()!= null){
-            usersDto.setPassword(usersDto.getNewPassword());
+            user.setPassword(passwordEncoder.encode(usersDto.getNewPassword()));
         }
         user = usersEditMapper.makeModel(usersDto, user);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersRepo.save(user);
         return new ResponseTextDto(ResponseMessages.SUCCESS);
     }
@@ -115,9 +124,25 @@ public class UsersServiceImpl implements UsersService {
         usersRepo.save(user);
     }
 
+    @Override
+    public ResponseTextDto blockUser(long id){
+        User user = usersRepo.findById(id);
+        if (user.getRole() == UserRole.ROLE_ADMIN){
+            return new ResponseTextDto(ResponseMessages.CANT_BE_EDITED);
+        }
+        if (user.getBlocked() == false){
+            user.setBlocked(true);
+        }
+        else {
+            user.setBlocked(false);
+        }
+        return new ResponseTextDto(ResponseMessages.SUCCESS);
+    }
 
     private void newActivationCode(User user){
         user.setActivationCode(UUID.randomUUID().toString());
     }
+
+
 
 }

@@ -2,11 +2,13 @@ package kekstarter.services;
 
 import kekstarter.dto.CampaignsDto;
 import kekstarter.models.Campaign;
+import kekstarter.models.Tag;
 
 import java.util.List;
+import java.util.Set;
 
 public interface CampaignsService {
-    void addCampaigns(CampaignsDto campaignsDto);
+    Set<Tag> addCampaigns(CampaignsDto campaignsDto);
 
     CampaignsDto getCampaignById(long idCampaign);
 

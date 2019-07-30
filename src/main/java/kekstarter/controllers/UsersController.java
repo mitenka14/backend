@@ -50,6 +50,12 @@ public class UsersController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("{id}/block")
+    public ResponseTextDto block(final @PathVariable long id) {
+        return usersService.blockUser(id);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/admin/userlist")
     public List<UsersDto> getUsers() {
         return usersService.getUsers();

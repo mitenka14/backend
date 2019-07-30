@@ -50,7 +50,6 @@ public class User {
     private Boolean blocked = Boolean.TRUE;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonBackReference(value = "user-campaigns")
     private Set<Campaign> campaigns;
 
 }

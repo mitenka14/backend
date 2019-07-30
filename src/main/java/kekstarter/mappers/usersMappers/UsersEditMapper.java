@@ -11,7 +11,6 @@ public class UsersEditMapper {
         user.setFirstName(usersDto.getFirstName());
         user.setSecondName(usersDto.getSecondName());
         user.setUsername(usersDto.getUsername());
-        user.setPassword(usersDto.getPassword());
         user.setEmail(usersDto.getEmail());
         return user;
     }

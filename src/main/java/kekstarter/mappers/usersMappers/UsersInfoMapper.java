@@ -18,6 +18,7 @@ public class UsersInfoMapper {
         usersDto.setSecondName(user.getSecondName());
         usersDto.setEmail(user.getEmail());
         usersDto.setRole(user.getRole().name());
+        usersDto.setBlocked(user.getBlocked());
         return usersDto;
     }
 

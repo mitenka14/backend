@@ -20,6 +20,7 @@ public class CampaignsInfoMapper {
         campaignsDto.setName(campaign.getName());
         campaignsDto.setText(campaign.getText());
         campaignsDto.setImageUrl(campaign.getImageUrl());
+        campaignsDto.setTags(campaign.getTags());
         return campaignsDto;
     }
 

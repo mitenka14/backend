@@ -24,4 +24,6 @@ public interface UsersService {
     ResponseTextDto editUser(UsersDto usersDto, long id);
 
     void makeAdmin(long id);
+
+    ResponseTextDto blockUser(long id);
 }
