@@ -4,9 +4,9 @@ import kekstarter.dto.CampaignsDto;
 import kekstarter.models.Campaign;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Component
 public class CampaignsInfoMapper {
@@ -25,6 +25,8 @@ public class CampaignsInfoMapper {
     }
 
     public List<CampaignsDto> makeList(final List<Campaign> campaignsList) {
-        return campaignsList.stream().map(this::makeDto).collect(Collectors.toList());
+        return campaignsList.stream()
+                .map(this::makeDto)
+                .collect(toList());
     }
 }

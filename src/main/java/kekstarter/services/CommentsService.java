@@ -8,4 +8,5 @@ public interface CommentsService {
     void addComment(CommentsDto commentsDto, long idCampaign);
 
     List<CommentsDto> getComments(long idCampaign);
+
 }

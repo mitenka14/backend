@@ -15,7 +15,7 @@ public class CommentsController {
 
     private final CommentsService commentsService;
 
-    @PostMapping("/{idCampaign}")
+    @PostMapping("{idCampaign}")
     public void addComment(@RequestBody CommentsDto commentsDto, @PathVariable long idCampaign){
         commentsService.addComment(commentsDto, idCampaign);
     }

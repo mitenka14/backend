@@ -2,6 +2,7 @@ package kekstarter.services;
 
 import kekstarter.dto.CampaignsDto;
 import kekstarter.models.Campaign;
+import kekstarter.models.Comment;
 import kekstarter.models.Tag;
 
 import java.util.List;
@@ -20,5 +21,11 @@ public interface CampaignsService {
 
     List<CampaignsDto> getCampaignsByUserId(long idUser);
 
+    List<CampaignsDto> getCampaignsByTagId(long id);
+
+    List<CampaignsDto> searchCampaigns(String text);
+
     void editCampaign(CampaignsDto campaignsDto);
+
+
 }

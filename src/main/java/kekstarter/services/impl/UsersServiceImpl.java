@@ -1,17 +1,19 @@
 package kekstarter.services.impl;
 
-import kekstarter.dto.CampaignsDto;
-import kekstarter.mappers.usersMappers.UsersInfoMapper;
-import kekstarter.models.Campaign;
-import kekstarter.models.UserRole;
-import kekstarter.repositories.CampaignsRepo;
-import kekstarter.responseMessage.ResponseMessages;
 import kekstarter.dto.ResponseTextDto;
 import kekstarter.dto.UsersDto;
 import kekstarter.mappers.usersMappers.UsersEditMapper;
+import kekstarter.mappers.usersMappers.UsersInfoMapper;
+import kekstarter.models.Campaign;
 import kekstarter.models.User;
+import kekstarter.models.UserRole;
+import kekstarter.repositories.CampaignsRepo;
 import kekstarter.repositories.UsersRepo;
-import kekstarter.services.*;
+import kekstarter.responseMessage.ResponseMessages;
+import kekstarter.services.AuthenticationsService;
+import kekstarter.services.MailService;
+import kekstarter.services.TagsService;
+import kekstarter.services.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -77,10 +79,7 @@ public class UsersServiceImpl implements UsersService {
     public void deleteUserById(long id) {
         User user = usersRepo.findById(id);
         if(user.getRole() == UserRole.ROLE_USER) {
-            List<Campaign> campaigns = campaignsRepo.findAllByUser(user);
-            for(Campaign campaign : campaigns){
-                tagsService.deleteTags(campaign);
-            }
+            campaignsRepo.findAllByUser(user).forEach(tagsService::deleteTags);
             usersRepo.delete(user);
         }
     }

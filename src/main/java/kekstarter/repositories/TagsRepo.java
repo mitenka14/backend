@@ -18,5 +18,7 @@ public interface TagsRepo extends JpaRepository<Tag, Long> {
 
     Tag findByName(String name);
 
-    Set<Tag> findTop10ByOrderByCounterDesc();
+    List<Tag> findTop10ByOrderByCounterDesc();
+
+    Tag findById(long id);
 }

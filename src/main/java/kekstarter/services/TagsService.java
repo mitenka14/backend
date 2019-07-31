@@ -3,6 +3,7 @@ package kekstarter.services;
 import kekstarter.models.Campaign;
 import kekstarter.models.Tag;
 
+import java.util.List;
 import java.util.Set;
 
 public interface TagsService {
@@ -10,5 +11,9 @@ public interface TagsService {
 
     void deleteTags(Campaign campaign);
 
-    Set<Tag> getTopTags();
+    List<Tag> getTopTags();
+
+    Tag getTag(long id);
+
+
 }

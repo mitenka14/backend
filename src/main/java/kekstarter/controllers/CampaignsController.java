@@ -1,15 +1,12 @@
 package kekstarter.controllers;
 
 import kekstarter.dto.CampaignsDto;
-import kekstarter.models.Campaign;
-import kekstarter.models.Tag;
 import kekstarter.services.CampaignsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping(value = "campaigns",produces = MediaType.APPLICATION_JSON_VALUE)
@@ -18,20 +15,29 @@ public class CampaignsController {
 
     private final CampaignsService campaignsService;
 
-
-    @GetMapping("list")
+    @GetMapping
     public List<CampaignsDto> getCampaigns() {
         return campaignsService.getCampaigns();
     }
 
-    @GetMapping("userlist/{idUser}")
+    @GetMapping("users/{idUser}")
     public List<CampaignsDto> getCampaignsByUserId(@PathVariable long idUser){
         return campaignsService.getCampaignsByUserId(idUser);
     }
 
-    @PostMapping("add")
-    public Set<Tag> addCampaigns(@RequestBody CampaignsDto campaignsDto) {
-        return campaignsService.addCampaigns(campaignsDto);
+    @GetMapping("tag/{id}")
+    public List<CampaignsDto> getCampaignsByTag(@PathVariable long id) {
+        return campaignsService.getCampaignsByTagId(id);
+    }
+
+    @GetMapping("search/{text}")
+    public List<CampaignsDto> searchCampaigns(@PathVariable String text){
+        return campaignsService.searchCampaigns(text);
+    }
+
+    @PostMapping
+    public void addCampaigns(@RequestBody CampaignsDto campaignsDto) {
+        campaignsService.addCampaigns(campaignsDto);
     }
 
     @GetMapping("campaign/{idCampaign}")

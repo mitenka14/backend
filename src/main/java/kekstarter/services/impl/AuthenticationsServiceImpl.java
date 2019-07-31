@@ -43,7 +43,7 @@ public class AuthenticationsServiceImpl implements AuthenticationsService {
             if (authResult.isAuthenticated()) {
                 JwtUserDetails userDetails = (JwtUserDetails) authResult.getPrincipal();
                 User user = usersRepo.findById((long) userDetails.getId());
-                if (user.getBlocked() == true) {
+                if (user.getBlocked()) {
                     return new LoginResponseDto(null, new ResponseTextDto(ResponseMessages.USER_BLOCKED), user);
                 }
                 String token = this.authenticationHelper.generateToken(userDetails.getId());

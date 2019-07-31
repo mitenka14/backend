@@ -4,6 +4,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,6 +16,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @RequiredArgsConstructor
+@Indexed
 public class Comment {
 
     @Id
@@ -21,6 +25,7 @@ public class Comment {
 
     @NotNull
     @Column(name = "text")
+    @Field(index = Index.YES)
     private String text;
 
     @ManyToOne

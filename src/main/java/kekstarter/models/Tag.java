@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.SortComparator;
-import org.hibernate.annotations.SortNatural;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -27,7 +25,7 @@ public class Tag {
     private String name;
 
     @Column(name = "counter")
-    private Long counter;
+    private Long counter = (long)1;
 
     @JsonBackReference(value = "campaigns-tags")
     @ManyToMany(mappedBy = "tags")

@@ -3,20 +3,16 @@ package kekstarter.services.impl;
 import kekstarter.dto.CampaignsDto;
 import kekstarter.mappers.campaignsMappers.CampaignsEditMapper;
 import kekstarter.mappers.campaignsMappers.CampaignsInfoMapper;
-import kekstarter.models.Campaign;
-import kekstarter.models.Tag;
-import kekstarter.models.User;
-import kekstarter.models.UserRole;
+import kekstarter.models.*;
 import kekstarter.repositories.CampaignsRepo;
-import kekstarter.services.AuthenticationsService;
-import kekstarter.services.CampaignsService;
-import kekstarter.services.TagsService;
-import kekstarter.services.UsersService;
+import kekstarter.services.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -28,11 +24,12 @@ public class CampaignsServiceImpl implements CampaignsService {
     private final UsersService usersService;
     private final AuthenticationsService authenticationsService;
     private final TagsService tagsService;
+    private final SearchService searchService;
 
     @Override
     public Set<Tag> addCampaigns(CampaignsDto campaignsDto) {
         Campaign campaign = new Campaign();
-        if (campaignsDto.getImageUrl() == ""){
+        if (campaignsDto.getImageUrl().equals("")){
             campaignsDto.setImageUrl("https://www.dropbox.com/s/rqjmneh4dwb1bys/cadf1f02-89da-4abb-84f4-ba508f06c8b6?raw=1");
         }
         campaign = campaignsEditMapper.makeModel(campaignsDto, campaign);
@@ -81,5 +78,25 @@ public class CampaignsServiceImpl implements CampaignsService {
     @Override
     public List<CampaignsDto> getCampaignsByUserId(long idUser){
         return campaignsInfoMapper.makeList(campaignsRepo.findAllByUser(usersService.findUserById(idUser)));
+    }
+
+    @Override
+    public List<CampaignsDto> getCampaignsByTagId(long id){
+        return campaignsInfoMapper.makeList(campaignsRepo.findAllByTags(tagsService.getTag(id)));
+    }
+
+    @Override
+    public List<CampaignsDto> searchCampaigns(String text){
+        String campaignFields[] = new String[]{"name","text"};
+        List<Campaign> campaignList = searchService.search(text, campaignFields, Campaign.class);
+        String commentFields[] = new String[]{"text"};
+        List<Comment> commentList = searchService.search(text, commentFields, Comment.class);
+        List<Campaign> campaignListFromComments = commentList.stream().map(this::getCampaignFromComment).collect(Collectors.toList());
+        return campaignsInfoMapper.makeList(Stream.concat(campaignList.stream(), campaignListFromComments.stream())
+                .collect(Collectors.toList()));
+    }
+
+    private Campaign getCampaignFromComment(Comment comment){
+        return comment.getCampaign();
     }
 }

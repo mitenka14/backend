@@ -22,6 +22,8 @@ public class CommentsInfoMapper {
     }
 
     public List<CommentsDto> makeList(List<Comment> commentsList){
-        return commentsList.stream().map(this::makeDto).collect(Collectors.toList());
+        return commentsList.stream()
+                .map(this::makeDto)
+                .collect(Collectors.toList());
     }
 }

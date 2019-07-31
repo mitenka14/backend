@@ -2,6 +2,9 @@ package kekstarter.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,6 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 @RequiredArgsConstructor
+@Indexed
 public class Campaign {
 
     @Id
@@ -23,10 +27,12 @@ public class Campaign {
     @NotNull
     @Size(min = 4)
     @Column(name = "name")
+    @Field(index = Index.YES)
     private String name;
 
     @NotNull
     @Column(name = "text")
+    @Field(index = Index.YES)
     private String text;
 
     @NotNull
