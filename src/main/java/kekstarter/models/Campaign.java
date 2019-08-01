@@ -42,6 +42,9 @@ public class Campaign {
     @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
     private Set<Comment> comments;
 
+    @OneToMany(mappedBy = "campaign")
+    private Set<Bonus> bonuses;
+
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;

@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface CommentsRepo extends JpaRepository<Comment, Long> {
+
     List<Comment> findAllByCampaign(Campaign campaign);
-    Comment deleteAllByCampaign(Campaign campaign);
+
 }

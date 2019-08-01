@@ -89,14 +89,14 @@ public class CampaignsServiceImpl implements CampaignsService {
     public List<CampaignsDto> searchCampaigns(String text){
         String campaignFields[] = new String[]{"name","text"};
         List<Campaign> campaignList = searchService.search(text, campaignFields, Campaign.class);
-        String commentFields[] = new String[]{"text"};
-        List<Comment> commentList = searchService.search(text, commentFields, Comment.class);
-        List<Campaign> campaignListFromComments = commentList.stream().map(this::getCampaignFromComment).collect(Collectors.toList());
-        return campaignsInfoMapper.makeList(Stream.concat(campaignList.stream(), campaignListFromComments.stream())
-                .collect(Collectors.toList()));
+        String commentAndBonusFields[] = new String[]{"text"};
+        List<Comment> commentList = searchService.search(text, commentAndBonusFields, Comment.class);
+        List<Campaign> campaignListByComments = commentList.stream().map(comment -> comment.getCampaign()).collect(Collectors.toList());
+        List<Bonus> bonusList = searchService.search(text, commentAndBonusFields, Bonus.class);
+        List<Campaign> campaignListByBonuses = bonusList.stream().map(bonus -> bonus.getCampaign()).collect(Collectors.toList());
+        campaignList.addAll(campaignListByComments);
+        campaignList.addAll(campaignListByBonuses);
+        return campaignsInfoMapper.makeList(campaignList);
     }
 
-    private Campaign getCampaignFromComment(Comment comment){
-        return comment.getCampaign();
-    }
 }

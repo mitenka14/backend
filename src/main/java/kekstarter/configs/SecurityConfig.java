@@ -27,7 +27,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String[] allowedGetUrls = new String[]{"/campaigns/**", "/users/*", "/tags", "/users/activation/*", "/comments/**"};
+    private static final String[] allowedGetUrls = new String[]{"/campaigns/**", "/users/*", "/tags", "/bonuses/**", "/users/activation/*", "/comments/**"};
 
     private final JwtAuthenticationProvider jwtAuthenticationProvider;
     private final UserDetailsService userDetailsService;

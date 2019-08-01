@@ -1,5 +1,6 @@
 package kekstarter.services.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.lucene.search.Query;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
@@ -12,16 +13,10 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class SearchServiceImpl implements kekstarter.services.SearchService {
 
-    @Autowired
     private final EntityManager entityManager;
-
-    @Autowired
-    public SearchServiceImpl(final EntityManager entityManager) {
-        super();
-        this.entityManager = entityManager;
-    }
 
     @Override
     @Transactional
