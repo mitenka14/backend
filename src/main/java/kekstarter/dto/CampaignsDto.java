@@ -18,4 +18,6 @@ public class CampaignsDto {
     private String username;
     private String tagsString;
     private Set<Tag> tags;
+    private int collectedFunds;
+    private int goal;
 }

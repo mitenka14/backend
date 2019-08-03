@@ -1,6 +1,7 @@
 package kekstarter.services;
 
 import kekstarter.dto.CampaignsDto;
+import kekstarter.models.Bonus;
 import kekstarter.models.Campaign;
 import kekstarter.models.Comment;
 import kekstarter.models.Tag;
@@ -27,5 +28,6 @@ public interface CampaignsService {
 
     void editCampaign(CampaignsDto campaignsDto);
 
+    Campaign findCampaignByBonus(Bonus bonus);
 
 }

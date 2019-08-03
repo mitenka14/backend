@@ -99,4 +99,9 @@ public class CampaignsServiceImpl implements CampaignsService {
         return campaignsInfoMapper.makeList(campaignList);
     }
 
+    @Override
+    public Campaign findCampaignByBonus(Bonus bonus){
+        return campaignsRepo.findByBonuses(bonus);
+    }
+
 }

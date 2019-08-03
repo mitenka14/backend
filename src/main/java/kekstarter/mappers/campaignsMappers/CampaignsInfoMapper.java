@@ -21,6 +21,8 @@ public class CampaignsInfoMapper {
         campaignsDto.setText(campaign.getText());
         campaignsDto.setImageUrl(campaign.getImageUrl());
         campaignsDto.setTags(campaign.getTags());
+        campaignsDto.setGoal(campaign.getGoal());
+        campaignsDto.setCollectedFunds(campaign.getCollectedFunds());
         return campaignsDto;
     }
 

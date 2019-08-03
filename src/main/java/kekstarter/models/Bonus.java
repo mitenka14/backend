@@ -9,6 +9,8 @@ import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.Set;
@@ -30,10 +32,11 @@ public class Bonus {
     private String text;
 
     @NotNull
+    @Min(1)
     @Column(name = "price")
     private Integer price;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_campaign")
     private Campaign campaign;
 

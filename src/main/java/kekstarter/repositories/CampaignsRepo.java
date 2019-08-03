@@ -1,5 +1,6 @@
 package kekstarter.repositories;
 
+import kekstarter.models.Bonus;
 import kekstarter.models.Campaign;
 import kekstarter.models.Tag;
 import kekstarter.models.User;
@@ -17,4 +18,5 @@ public interface CampaignsRepo extends JpaRepository<Campaign, Long> {
 
     List<Campaign> findAllByTags(Tag tag);
 
+    Campaign findByBonuses(Bonus bonus);
 }

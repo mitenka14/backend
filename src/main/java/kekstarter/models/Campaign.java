@@ -7,6 +7,7 @@ import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -38,6 +39,14 @@ public class Campaign {
     @NotNull
     @Column(name = "imageUrl")
     private String imageUrl;
+
+    @NotNull
+    @Min(1)
+    @Column(name = "goal")
+    private Integer goal;
+
+    @Column(name = "collectedFunds")
+    private Integer collectedFunds = 0;
 
     @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
     private Set<Comment> comments;

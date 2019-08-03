@@ -1,5 +1,6 @@
 package kekstarter.controllers;
 
+import kekstarter.dto.BonusesDto;
 import kekstarter.dto.ResponseTextDto;
 import kekstarter.models.Bonus;
 import kekstarter.services.BonusesService;
@@ -17,17 +18,17 @@ public class BonusesController {
     private final BonusesService bonusesService;
 
     @PostMapping("campaign/{idCampaign}")
-    public void addBonus(@PathVariable long idCampaign, @RequestBody Bonus bonus){
-        bonusesService.addBonus(bonus, idCampaign);
+    public void addBonus(@PathVariable long idCampaign, @RequestBody BonusesDto bonusesDto){
+        bonusesService.addBonus(bonusesDto, idCampaign);
     }
 
     @GetMapping("campaign/{idCampaign}")
-    public List<Bonus> getBonusesByCampaign(@PathVariable long idCampaign){
+    public List<BonusesDto> getBonusesByCampaign(@PathVariable long idCampaign){
         return bonusesService.getBonusesByCampaign(idCampaign);
     }
 
     @GetMapping("user/{idUser}")
-    public List<Bonus> getBonusesByUser(@PathVariable long idUser){
+    public List<BonusesDto> getBonusesByUser(@PathVariable long idUser){
         return bonusesService.getBonusesByUser(idUser);
     }
 

@@ -1,6 +1,9 @@
 package kekstarter.services.impl;
 
+import kekstarter.dto.BonusesDto;
 import kekstarter.dto.ResponseTextDto;
+import kekstarter.mappers.bonusesMappers.BonusEditMapper;
+import kekstarter.mappers.bonusesMappers.BonusInfoMapper;
 import kekstarter.models.Bonus;
 import kekstarter.models.Campaign;
 import kekstarter.models.User;
@@ -23,25 +26,28 @@ public class BonusesServiceImpl implements BonusesService {
     private final BonusesRepo bonusesRepo;
     private final CampaignsService campaignsService;
     private final UsersService usersService;
+    private final BonusEditMapper bonusEditMapper;
+    private final BonusInfoMapper bonusInfoMapper;
 
     @Override
-    public void addBonus(Bonus bonus, long idCampaign){
+    public void addBonus(BonusesDto bonusesDto, long idCampaign){
         Campaign campaign = campaignsService.findCampaignById(idCampaign);
         User user = usersService.getUserFromToken();
         if (user.getRole() == UserRole.ROLE_ADMIN || user.getId() == campaign.getUser().getId()){
+            Bonus bonus = bonusEditMapper.makeModel(bonusesDto);
             bonus.setCampaign(campaign);
             bonusesRepo.save(bonus);
         }
     }
 
     @Override
-    public List<Bonus> getBonusesByCampaign(long idCampaign){
-        return bonusesRepo.findAllByCampaign(campaignsService.findCampaignById(idCampaign));
+    public List<BonusesDto> getBonusesByCampaign(long idCampaign){
+        return bonusInfoMapper.makeListByCampaign(bonusesRepo.findAllByCampaign(campaignsService.findCampaignById(idCampaign)));
     }
 
     @Override
-    public List<Bonus> getBonusesByUser(long idUser){
-        return bonusesRepo.findAllByUsers(usersService.findUserById(idUser));
+    public List<BonusesDto> getBonusesByUser(long idUser){
+        return bonusInfoMapper.makeListByUser(bonusesRepo.findAllByUsers(usersService.findUserById(idUser)));
     }
 
     @Override
@@ -55,6 +61,9 @@ public class BonusesServiceImpl implements BonusesService {
         Set<User> userSet = bonus.getUsers();
         userSet.add(user);
         bonus.setUsers(userSet);
+        Campaign campaign = campaignsService.findCampaignByBonus(bonus);
+        campaign.setCollectedFunds(campaign.getCollectedFunds()+bonus.getPrice());
+        bonus.setCampaign(campaign);
         bonusesRepo.save(bonus);
         return new ResponseTextDto(ResponseMessages.SUCCESS);
     }
