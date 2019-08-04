@@ -30,4 +30,6 @@ public interface CampaignsService {
 
     Campaign findCampaignByBonus(Bonus bonus);
 
+    List<CampaignsDto> getCampaignByCategory(String category);
+
 }

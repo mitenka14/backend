@@ -17,6 +17,7 @@ public class CampaignsDto {
     private long id_user;
     private String username;
     private String tagsString;
+    private String category;
     private Set<Tag> tags;
     private int collectedFunds;
     private int goal;

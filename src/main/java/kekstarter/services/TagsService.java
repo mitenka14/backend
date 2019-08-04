@@ -1,5 +1,6 @@
 package kekstarter.services;
 
+import kekstarter.dto.TagsDto;
 import kekstarter.models.Campaign;
 import kekstarter.models.Tag;
 
@@ -11,7 +12,7 @@ public interface TagsService {
 
     void deleteTags(Campaign campaign);
 
-    List<Tag> getTopTags();
+    List<TagsDto> getTopTags();
 
     Tag getTag(long id);
 

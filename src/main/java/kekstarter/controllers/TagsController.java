@@ -1,5 +1,6 @@
 package kekstarter.controllers;
 
+import kekstarter.dto.TagsDto;
 import kekstarter.models.Campaign;
 import kekstarter.models.Tag;
 import kekstarter.services.TagsService;
@@ -21,7 +22,7 @@ public class TagsController {
     private final TagsService tagsService;
 
     @GetMapping
-    public List<Tag> getTags(){
+    public List<TagsDto> getTags(){
         return tagsService.getTopTags();
     }
 

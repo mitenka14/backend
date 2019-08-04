@@ -45,13 +45,17 @@ public class Campaign {
     @Column(name = "goal")
     private Integer goal;
 
+    @NotNull
+    @Column(name = "category")
+    private String category;
+
     @Column(name = "collectedFunds")
     private Integer collectedFunds = 0;
 
     @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
     private Set<Comment> comments;
 
-    @OneToMany(mappedBy = "campaign")
+    @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
     private Set<Bonus> bonuses;
 
     @ManyToOne

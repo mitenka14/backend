@@ -30,6 +30,11 @@ public class CampaignsController {
         return campaignsService.getCampaignsByTagId(id);
     }
 
+    @GetMapping("category/{category}")
+    public List<CampaignsDto> getCampaignsByCategory(@PathVariable String category){
+        return campaignsService.getCampaignByCategory(category);
+    }
+
     @GetMapping("search/{text}")
     public List<CampaignsDto> searchCampaigns(@PathVariable String text){
         return campaignsService.searchCampaigns(text);

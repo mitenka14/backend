@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 import java.util.Set;
@@ -51,7 +52,7 @@ public class User {
     private Boolean blocked = Boolean.TRUE;
 
     @Column(name = "money")
-    private Integer money = 1000;
+    private Integer money = 10000;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Campaign> campaigns;

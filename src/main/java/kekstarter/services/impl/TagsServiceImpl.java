@@ -1,5 +1,7 @@
 package kekstarter.services.impl;
 
+import kekstarter.dto.TagsDto;
+import kekstarter.mappers.TagsInfoMapper;
 import kekstarter.models.Campaign;
 import kekstarter.models.Tag;
 import kekstarter.repositories.TagsRepo;
@@ -17,6 +19,7 @@ import java.util.stream.Stream;
 public class TagsServiceImpl implements TagsService {
 
     private final TagsRepo tagsRepo;
+    private final TagsInfoMapper tagsInfoMapper;
 
     @Override
     public Set<Tag> addTags(final String tagsLine) {
@@ -32,8 +35,8 @@ public class TagsServiceImpl implements TagsService {
     }
 
     @Override
-    public List<Tag> getTopTags(){
-        return tagsRepo.findTop10ByOrderByCounterDesc();
+    public List<TagsDto> getTopTags(){
+        return tagsInfoMapper.makeList(tagsRepo.findTop10ByOrderByCounterDesc());
     }
 
     private void decrementTagCounter(Tag tag){

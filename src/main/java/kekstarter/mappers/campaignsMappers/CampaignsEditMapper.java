@@ -12,6 +12,7 @@ public class CampaignsEditMapper {
         campaign.setName(campaignsDto.getName());
         campaign.setText(campaignsDto.getText());
         campaign.setImageUrl(campaignsDto.getImageUrl());
+        campaign.setCategory(campaignsDto.getCategory());
         campaign.setGoal(campaignsDto.getGoal());
         return campaign;
     }

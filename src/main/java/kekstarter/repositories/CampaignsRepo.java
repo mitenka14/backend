@@ -19,4 +19,6 @@ public interface CampaignsRepo extends JpaRepository<Campaign, Long> {
     List<Campaign> findAllByTags(Tag tag);
 
     Campaign findByBonuses(Bonus bonus);
+
+    List<Campaign> findAllByCategory(String category);
 }

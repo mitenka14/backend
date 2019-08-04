@@ -86,6 +86,11 @@ public class CampaignsServiceImpl implements CampaignsService {
     }
 
     @Override
+    public List<CampaignsDto> getCampaignByCategory(String category){
+        return campaignsInfoMapper.makeList(campaignsRepo.findAllByCategory(category));
+    }
+
+    @Override
     public List<CampaignsDto> searchCampaigns(String text){
         String campaignFields[] = new String[]{"name","text"};
         List<Campaign> campaignList = searchService.search(text, campaignFields, Campaign.class);
@@ -94,9 +99,8 @@ public class CampaignsServiceImpl implements CampaignsService {
         List<Campaign> campaignListByComments = commentList.stream().map(comment -> comment.getCampaign()).collect(Collectors.toList());
         List<Bonus> bonusList = searchService.search(text, commentAndBonusFields, Bonus.class);
         List<Campaign> campaignListByBonuses = bonusList.stream().map(bonus -> bonus.getCampaign()).collect(Collectors.toList());
-        campaignList.addAll(campaignListByComments);
-        campaignList.addAll(campaignListByBonuses);
-        return campaignsInfoMapper.makeList(campaignList);
+        List<Campaign> mergedList = Stream.concat(Stream.concat(campaignList.stream(), campaignListByComments.stream()), campaignListByBonuses.stream()).collect(Collectors.toList());
+        return campaignsInfoMapper.makeList(mergedList);
     }
 
     @Override

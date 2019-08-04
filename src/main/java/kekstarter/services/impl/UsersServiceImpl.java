@@ -96,10 +96,10 @@ public class UsersServiceImpl implements UsersService {
             return new ResponseTextDto(ResponseMessages.DONT_HAVE_PERMISSION);
         }
         User user = usersRepo.findById(id);
-        if (user.getRole() == UserRole.ROLE_ADMIN){
+        if (user.getRole() == UserRole.ROLE_ADMIN && editor.getId()!= id){
             return new ResponseTextDto(ResponseMessages.CANT_BE_EDITED);
         }
-        if (editor.getRole() != UserRole.ROLE_ADMIN && !passwordEncoder.matches(usersDto.getPassword(), user.getPassword())) {
+        if ((editor.getRole() != UserRole.ROLE_ADMIN || user.getRole() == UserRole.ROLE_ADMIN) && !passwordEncoder.matches(usersDto.getPassword(), user.getPassword())) {
             return new ResponseTextDto(ResponseMessages.INVALID_PASSWORD);
         }
         if(!user.getUsername().equals(usersDto.getUsername()) && usersRepo.existsByUsername(usersDto.getUsername())){
