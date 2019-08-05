@@ -11,7 +11,6 @@ import static java.util.stream.Collectors.toList;
 @Component
 public class CampaignsInfoMapper {
 
-
     public CampaignsDto makeDto(Campaign campaign) {
         CampaignsDto campaignsDto = new CampaignsDto();
         campaignsDto.setId(campaign.getId());
@@ -32,4 +31,5 @@ public class CampaignsInfoMapper {
                 .map(this::makeDto)
                 .collect(toList());
     }
+
 }

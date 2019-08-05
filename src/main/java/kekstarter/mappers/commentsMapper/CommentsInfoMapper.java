@@ -4,12 +4,17 @@ import kekstarter.dto.CommentsDto;
 import kekstarter.models.Comment;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class CommentsInfoMapper {
+
+    public List<CommentsDto> makeList(List<Comment> commentsList){
+        return commentsList.stream()
+                .map(this::makeDto)
+                .collect(Collectors.toList());
+    }
 
     private CommentsDto makeDto(Comment comment){
         CommentsDto commentsDto = new CommentsDto();
@@ -21,9 +26,4 @@ public class CommentsInfoMapper {
         return commentsDto;
     }
 
-    public List<CommentsDto> makeList(List<Comment> commentsList){
-        return commentsList.stream()
-                .map(this::makeDto)
-                .collect(Collectors.toList());
-    }
 }

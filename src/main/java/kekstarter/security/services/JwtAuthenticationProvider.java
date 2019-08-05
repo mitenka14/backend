@@ -1,6 +1,5 @@
 package kekstarter.security.services;
 
-
 import kekstarter.models.User;
 import kekstarter.repositories.UsersRepo;
 import kekstarter.security.exceptions.ExpiredTokenAuthenticationException;
@@ -16,13 +15,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
-
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationProvider implements AuthenticationProvider {
 
     private static final long MILLIS_IN_SECOND = 1000L;
-
     private final UsersRepo usersRepo;
     private final AuthenticationHelper authenticationHelper;
 
@@ -62,4 +59,5 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     public boolean supports(final Class<?> authentication) {
         return JwtAuthenticationToken.class.isAssignableFrom(authentication);
     }
+
 }

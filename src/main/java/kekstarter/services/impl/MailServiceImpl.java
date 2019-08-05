@@ -13,11 +13,8 @@ public class MailServiceImpl implements MailService {
 
     private final JavaMailSender mailSender;
 
-
     @Value("${spring.mail.username}")
     private String username;
-
-
 
     @Override
     public void send(String emailTo, String code) {
@@ -28,4 +25,5 @@ public class MailServiceImpl implements MailService {
         mailMessage.setText("Welcome to KEKstarter! Please, visit next link to finish registration: http://localhost:3000/users/activation/"+code);
         mailSender.send(mailMessage);
     }
+
 }

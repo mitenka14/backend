@@ -21,4 +21,5 @@ public interface TagsRepo extends JpaRepository<Tag, Long> {
     List<Tag> findTop10ByOrderByCounterDesc();
 
     Tag findById(long id);
+
 }

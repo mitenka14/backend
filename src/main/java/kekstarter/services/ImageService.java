@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public interface ImageService {
+
     String uploadImage(MultipartFile image);
 
     String getPublicUrl(String fileName);

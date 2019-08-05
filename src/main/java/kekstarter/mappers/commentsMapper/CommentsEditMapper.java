@@ -4,10 +4,6 @@ import kekstarter.dto.CommentsDto;
 import kekstarter.models.Campaign;
 import kekstarter.models.Comment;
 import kekstarter.models.User;
-import kekstarter.repositories.CampaignsRepo;
-import kekstarter.repositories.CommentsRepo;
-import kekstarter.repositories.UsersRepo;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,4 +18,5 @@ public class CommentsEditMapper {
         return comment;
 
     }
+
 }

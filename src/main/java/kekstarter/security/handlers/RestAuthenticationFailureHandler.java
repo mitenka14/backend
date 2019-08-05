@@ -14,4 +14,5 @@ public class RestAuthenticationFailureHandler implements AuthenticationFailureHa
                                         final AuthenticationException exception) throws IOException {
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, exception.getMessage());
     }
+
 }

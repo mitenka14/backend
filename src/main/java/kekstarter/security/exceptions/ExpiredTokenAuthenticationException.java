@@ -7,4 +7,5 @@ public class ExpiredTokenAuthenticationException extends AuthenticationException
     public ExpiredTokenAuthenticationException() {
         super("Authentication token is expired.");
     }
+
 }

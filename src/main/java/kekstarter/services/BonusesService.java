@@ -2,11 +2,11 @@ package kekstarter.services;
 
 import kekstarter.dto.BonusesDto;
 import kekstarter.dto.ResponseTextDto;
-import kekstarter.models.Bonus;
 
 import java.util.List;
 
 public interface BonusesService {
+
     void addBonus(BonusesDto bonusesDto, long idCampaign);
 
     List<BonusesDto> getBonusesByCampaign(long idCampaign);
@@ -14,4 +14,5 @@ public interface BonusesService {
     List<BonusesDto> getBonusesByUser(long idUser);
 
     ResponseTextDto buyBonus(long id);
+
 }

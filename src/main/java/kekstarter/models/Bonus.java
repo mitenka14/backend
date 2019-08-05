@@ -9,9 +9,9 @@ import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 import java.util.Set;
 
@@ -27,6 +27,7 @@ public class Bonus {
     private Long id;
 
     @NotNull
+    @Size(min=10)
     @Column(name = "text")
     @Field(index = Index.YES)
     private String text;
@@ -59,4 +60,5 @@ public class Bonus {
     public int hashCode() {
         return Objects.hash(id, text, price);
     }
+
 }

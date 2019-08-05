@@ -26,4 +26,5 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
                 .map(JwtUserDetails::new)
                 .orElseThrow(() -> new JsonException("User nor found."));
     }
+
 }

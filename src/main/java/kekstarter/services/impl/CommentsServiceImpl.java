@@ -34,6 +34,4 @@ public class CommentsServiceImpl implements CommentsService {
         return commentsInfoMapper.makeList(commentsRepo.findAllByCampaign(campaignsService.findCampaignById(idCampaign)));
     }
 
-
-
 }

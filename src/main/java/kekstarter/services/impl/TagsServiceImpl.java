@@ -24,7 +24,7 @@ public class TagsServiceImpl implements TagsService {
     @Override
     public Set<Tag> addTags(final String tagsLine) {
         final String refactoredTagsLine = tagsLine.trim().replaceAll("\\s+", " ");
-        return Stream.of(refactoredTagsLine)
+        return Stream.of(refactoredTagsLine.split(" "))
                 .map(this::setTagName)
                 .collect(Collectors.toSet());
     }
@@ -39,6 +39,11 @@ public class TagsServiceImpl implements TagsService {
         return tagsInfoMapper.makeList(tagsRepo.findTop10ByOrderByCounterDesc());
     }
 
+    @Override
+    public Tag getTag(long id){
+        return tagsRepo.findById(id);
+    }
+
     private void decrementTagCounter(Tag tag){
         tag.setCounter(tag.getCounter()-1);
         if (tag.getCounter() == 0){
@@ -46,11 +51,6 @@ public class TagsServiceImpl implements TagsService {
         } else {
             tagsRepo.save(tag);
         }
-    }
-
-    @Override
-    public Tag getTag(long id){
-        return tagsRepo.findById(id);
     }
 
     private Tag setTagName(final String name){
@@ -65,4 +65,5 @@ public class TagsServiceImpl implements TagsService {
         }
         return tag;
     }
+
 }

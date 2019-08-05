@@ -21,4 +21,5 @@ public interface CampaignsRepo extends JpaRepository<Campaign, Long> {
     Campaign findByBonuses(Bonus bonus);
 
     List<Campaign> findAllByCategory(String category);
+
 }

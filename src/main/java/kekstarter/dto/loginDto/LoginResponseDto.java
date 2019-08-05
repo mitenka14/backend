@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class LoginResponseDto {
+
     private String token;
     private ResponseTextDto responseTextDto;
     private long userId;
@@ -24,5 +25,6 @@ public class LoginResponseDto {
             this.userRole = user.getRole().toString();
         }
     }
+
 }
 

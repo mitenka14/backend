@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface TagsService {
+
     Set<Tag> addTags(String tagsString);
 
     void deleteTags(Campaign campaign);
@@ -15,6 +16,5 @@ public interface TagsService {
     List<TagsDto> getTopTags();
 
     Tag getTag(long id);
-
 
 }

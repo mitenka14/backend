@@ -2,7 +2,6 @@ package kekstarter.services.impl;
 
 import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
-import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.files.UploadErrorException;
 import com.dropbox.core.v2.sharing.SharedLinkMetadata;
 import kekstarter.dto.JsonException;
@@ -55,4 +54,5 @@ public class ImageServiceImpl implements ImageService {
         fos.close();
         return convFile;
     }
+
 }

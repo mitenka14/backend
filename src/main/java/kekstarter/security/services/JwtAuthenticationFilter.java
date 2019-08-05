@@ -65,4 +65,5 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 
         chain.doFilter(request, response);
     }
+
 }

@@ -21,4 +21,5 @@ public class TagsInfoMapper {
         tagsDto.setName(tag.getName());
         return tagsDto;
     }
+
 }

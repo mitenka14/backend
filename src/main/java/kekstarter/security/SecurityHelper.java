@@ -15,4 +15,5 @@ public class SecurityHelper {
 
         throw new JsonException("Authentication failed.");
     }
+
 }

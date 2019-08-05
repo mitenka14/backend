@@ -16,4 +16,5 @@ public interface BonusesRepo extends JpaRepository<Bonus, Long> {
     Bonus findById(long id);
 
     List<Bonus> findAllByUsers(User user);
+
 }

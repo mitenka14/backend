@@ -7,6 +7,7 @@ import kekstarter.models.User;
 import java.util.List;
 
 public interface UsersService {
+
     ResponseTextDto addUser(UsersDto usersDto);
 
     void activateUser(String code);
@@ -26,4 +27,5 @@ public interface UsersService {
     void makeAdmin(long id);
 
     ResponseTextDto blockUser(long id);
+
 }

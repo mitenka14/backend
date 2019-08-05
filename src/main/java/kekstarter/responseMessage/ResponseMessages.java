@@ -11,6 +11,7 @@ public class ResponseMessages {
     static public final String NOT_ENOUGH_MONEY="777";
 
     static public final String SUCCESS = "000";
+
 }
 
 

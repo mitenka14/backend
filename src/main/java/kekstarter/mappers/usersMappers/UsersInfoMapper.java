@@ -25,4 +25,5 @@ public class UsersInfoMapper {
     public List<UsersDto> makeList(List<User> userList) {
         return userList.stream().map(this::makeDto).collect(Collectors.toList());
     }
+
 }

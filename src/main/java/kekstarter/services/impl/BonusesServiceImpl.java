@@ -67,4 +67,5 @@ public class BonusesServiceImpl implements BonusesService {
         bonusesRepo.save(bonus);
         return new ResponseTextDto(ResponseMessages.SUCCESS);
     }
+
 }

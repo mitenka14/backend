@@ -2,7 +2,6 @@ package kekstarter.controllers;
 
 import kekstarter.dto.BonusesDto;
 import kekstarter.dto.ResponseTextDto;
-import kekstarter.models.Bonus;
 import kekstarter.services.BonusesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

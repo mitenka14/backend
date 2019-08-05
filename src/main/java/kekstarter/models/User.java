@@ -35,6 +35,7 @@ public class User {
 
     @NotNull
     @Column(name = "email", unique = true)
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
     private String email;
 
     @NotNull
@@ -80,4 +81,5 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, username, firstName, secondName, email, password, activationCode, blocked);
     }
+
 }

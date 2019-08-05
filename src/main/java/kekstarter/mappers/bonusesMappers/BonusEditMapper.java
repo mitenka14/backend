@@ -13,4 +13,5 @@ public class BonusEditMapper {
         bonus.setText(bonusesDto.getText());
         return bonus;
     }
+
 }

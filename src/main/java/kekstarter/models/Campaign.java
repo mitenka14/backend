@@ -1,7 +1,9 @@
 package kekstarter.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
@@ -10,7 +12,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -32,6 +33,7 @@ public class Campaign {
     private String name;
 
     @NotNull
+    @Size(min = 20)
     @Column(name = "text")
     @Field(index = Index.YES)
     private String text;
@@ -82,4 +84,5 @@ public class Campaign {
     public int hashCode() {
         return Objects.hash(id, name, text, imageUrl);
     }
+
 }

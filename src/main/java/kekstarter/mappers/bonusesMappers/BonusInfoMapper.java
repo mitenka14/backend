@@ -15,14 +15,6 @@ public class BonusInfoMapper {
         return bonusList.stream().map(this::makeDto).collect(toList());
     }
 
-    private BonusesDto makeDto(Bonus bonus){
-        BonusesDto bonusesDto = new BonusesDto();
-        bonusesDto.setId(bonus.getId());
-        bonusesDto.setPrice(bonus.getPrice());
-        bonusesDto.setText(bonus.getText());
-        return bonusesDto;
-    }
-
     public List<BonusesDto> makeListByUser(List<Bonus> bonusList){
         return bonusList.stream().map(this::makeDtoByUser).collect(toList());
     }
@@ -33,4 +25,13 @@ public class BonusInfoMapper {
         bonusesDto.setCampaignName(bonus.getCampaign().getName());
         return bonusesDto;
     }
+
+    private BonusesDto makeDto(Bonus bonus){
+        BonusesDto bonusesDto = new BonusesDto();
+        bonusesDto.setId(bonus.getId());
+        bonusesDto.setPrice(bonus.getPrice());
+        bonusesDto.setText(bonus.getText());
+        return bonusesDto;
+    }
+
 }

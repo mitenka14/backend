@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class TokenPayload {
+
     private Long userId;
     private long exp;
 
@@ -15,4 +16,5 @@ public class TokenPayload {
         this.userId = userId;
         this.exp = exp;
     }
+
 }

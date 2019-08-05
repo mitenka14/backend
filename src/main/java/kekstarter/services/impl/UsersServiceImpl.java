@@ -4,7 +4,6 @@ import kekstarter.dto.ResponseTextDto;
 import kekstarter.dto.UsersDto;
 import kekstarter.mappers.usersMappers.UsersEditMapper;
 import kekstarter.mappers.usersMappers.UsersInfoMapper;
-import kekstarter.models.Campaign;
 import kekstarter.models.User;
 import kekstarter.models.UserRole;
 import kekstarter.repositories.CampaignsRepo;
@@ -35,8 +34,6 @@ public class UsersServiceImpl implements UsersService {
     private final AuthenticationsService authenticationsService;
     private final TagsService tagsService;
     private final CampaignsRepo campaignsRepo;
-
-
 
     @Override
     public ResponseTextDto addUser(UsersDto usersDto){
@@ -141,7 +138,5 @@ public class UsersServiceImpl implements UsersService {
     private void newActivationCode(User user){
         user.setActivationCode(UUID.randomUUID().toString());
     }
-
-
 
 }
